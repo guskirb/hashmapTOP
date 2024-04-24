@@ -21,6 +21,8 @@ class HashMap {
 
     set(key, value) {
         const hashCode = this.hash(key);
+
+        this.checkCapacity();
         if (this.bucket[hashCode]) {
             if (this.bucket[hashCode].containsKey(key)) {
                 let index = this.bucket[hashCode].findKey(key);
@@ -33,9 +35,20 @@ class HashMap {
             this.bucket[hashCode] = new List;
             this.bucket[hashCode].prepend({ key, value });
         }
-        console.log(this.bucket[hashCode].toString());
-        console.log(this.bucket[hashCode].getHead);
-        console.log(this.atCapacity())
+    }
+
+    checkCapacity() {
+        if (this.atCapacity()) {
+            this.bucketLength = this.bucketLength * 2
+            this.bucket.forEach(item => {
+                let current = item.head;
+
+                while (current) {
+                    this.set(current.value.key, current.value.value);
+                    current = current.nextNode;
+                }
+            })
+        }
     }
 
     atCapacity() {
@@ -47,8 +60,8 @@ class HashMap {
         }
         return (indexFull >= (this.bucketLength * this.loadFactor) ? true : false);
     }
-}
 
+}
 let myHash = new HashMap;
 
 console.log(myHash.set('gus', 'hi'));
