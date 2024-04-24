@@ -137,7 +137,7 @@ export default List = class LinkedList {
         let current = this.head;
 
         if (index === 0) {
-            this.prepend(value);
+            current.value = value;
         } else {
             for (let x = 0; x < index - 1; x++) {
                 current = current.nextNode;
