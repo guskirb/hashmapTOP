@@ -1,6 +1,8 @@
 import Node from "./node.js";
 
-class LinkedList {
+let List;
+
+export default List = class LinkedList {
     constructor() {
         this.head = null;
         this.size = 0;
@@ -124,18 +126,18 @@ class LinkedList {
 }
 
 // console testing:
-const newLL = new LinkedList();
+// const newLL = new LinkedList();
 
-newLL.append('wassup');
-newLL.prepend('hi');
-newLL.append('sup');
-newLL.append('lol');
+// newLL.append('wassup');
+// newLL.prepend('hi');
+// newLL.append('sup');
+// newLL.append('lol');
 
-console.log(newLL.getSize);
-newLL.pop();
-console.log(newLL.find('lol'));
-console.log(newLL.insertAt('helloo', 1));
-console.log(newLL.remove(2));
-console.log(newLL.toString());
+// console.log(newLL.getSize);
+// newLL.pop();
+// console.log(newLL.find('lol'));
+// console.log(newLL.insertAt('helloo', 1));
+// console.log(newLL.remove(2));
+// console.log(newLL.toString());
 
-console.log(newLL.find('lol'));
+// console.log(newLL.find('lol'));
