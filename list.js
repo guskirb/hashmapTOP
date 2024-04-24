@@ -106,6 +106,19 @@ export default List = class LinkedList {
         return null;
     }
 
+    findValue(key) {
+        let current = this.head;
+
+        while (current !== null) {
+            if (current.value.key === key) {
+                return current.value.value;
+            } else {
+                current = current.nextNode;
+            }
+        }
+        return false;
+    }
+
     find(value) {
         let current = this.head
         let index = 0;
