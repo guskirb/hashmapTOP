@@ -35,6 +35,17 @@ class HashMap {
         }
         console.log(this.bucket[hashCode].toString());
         console.log(this.bucket[hashCode].getHead);
+        console.log(this.atCapacity())
+    }
+
+    atCapacity() {
+        let indexFull = 0;
+        for (let x = 0; x < this.bucketLength; x++) {
+            if (this.bucket[x]) {
+                indexFull++
+            }
+        }
+        return (indexFull >= (this.bucketLength * this.loadFactor) ? true : false);
     }
 }
 
@@ -44,3 +55,5 @@ console.log(myHash.set('gus', 'hi'));
 console.log(myHash.set('gus', 'lol'));
 console.log(myHash.set('hiya', 'hi'));
 console.log(myHash.set('hi', 'hi'));
+console.log(myHash.set('gus', 'bye'));
+console.log(myHash.set('gus', 'haha'));
