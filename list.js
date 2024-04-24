@@ -78,6 +78,34 @@ export default List = class LinkedList {
         return false;
     }
 
+    containsKey(key) {
+        let current = this.head;
+
+        while (current !== null) {
+            if (current.value.key === key) {
+                return true;
+            } else {
+                current = current.nextNode;
+            }
+        }
+        return false;
+    }
+
+    findKey(key) {
+        let current = this.head
+        let index = 0;
+
+        while (current !== null) {
+            if (current.value.key === key) {
+                return index;
+            } else {
+                current = current.nextNode;
+                index++;
+            }
+        }
+        return null;
+    }
+
     find(value) {
         let current = this.head
         let index = 0;
@@ -108,20 +136,39 @@ export default List = class LinkedList {
     insertAt(value, index) {
         let current = this.head;
 
-        for (let x = 0; x < index - 1; x++) {
-            current = current.nextNode;
+        if (index === 0) {
+            current = new Node(value, current.nextNode);
+        } else {
+            for (let x = 0; x < index - 1; x++) {
+                current = current.nextNode;
+            }
+            current.nextNode = new Node(value, current.nextNode);
         }
-        current.nextNode = new Node(value, current.nextNode);
         this.size++;
     }
 
     remove(index) {
         let current = this.head;
 
-        for (let x = 0; x < index - 1; x++) {
-            current = current.nextNode;
+        if (index === 0) {
+            if (current.nextNode) {
+                current.nextNode = current.nextNode.nextNode;
+            } else {
+                current.nextNode = null;
+            }
+            current = null;
+        } else {
+            for (let x = 0; x < index - 1; x++) {
+                current = current.nextNode;
+            }
+
+            if (current.nextNode) {
+                current.nextNode = current.nextNode.nextNode;
+            } else {
+                current.nextNode = null;
+            }
         }
-        current.nextNode = current.nextNode.nextNode;
+        this.size--;
     }
 }
 
