@@ -5,6 +5,7 @@ class HashMap {
         this.bucket = [];
         this.bucketLength = 16;
         this.loadFactor = 0.75;
+        this.keys = 0;
     }
 
     hash(key) {
@@ -30,16 +31,19 @@ class HashMap {
                 this.bucket[hashCode].insertAt({ key, value }, index);
             } else {
                 this.bucket[hashCode].append({ key, value });
+                this.keys++;
             }
         } else {
             this.bucket[hashCode] = new List;
             this.bucket[hashCode].prepend({ key, value });
+            this.keys++;
         }
     }
 
     checkCapacity() {
         if (this.atCapacity()) {
-            this.bucketLength = this.bucketLength * 2
+            this.keys = 0;
+            this.bucketLength = this.bucketLength * 2;
             this.bucket.forEach(item => {
                 let current = item.head;
 
@@ -61,6 +65,45 @@ class HashMap {
         return (indexFull >= (this.bucketLength * this.loadFactor) ? true : false);
     }
 
+    get(key) {
+        const hashCode = this.hash(key);
+
+        return this.bucket[hashCode].findValue(key);
+    }
+
+    has(key) {
+        let hasKey = false;
+        const hashCode = this.hash(key);
+
+        if (this.bucket[hashCode]) {
+            hasKey = this.bucket[hashCode].containsKey(key);
+        }
+        return hasKey;
+    }
+
+    remove(key) {
+        let removedKey = false;
+        const hashCode = this.hash(key);
+
+        if (this.bucket[hashCode]) {
+            let index = this.bucket[hashCode].findKey(key);
+            this.bucket[hashCode].remove(index);
+            removedKey = true;
+            this.keys--;
+        }
+
+        return removedKey;
+    }
+
+    get length() {
+        return this.keys;
+    }
+
+    clear() {
+        this.bucket = [];
+        this.bucketLength = 16;
+        this.keys = 0;
+    }
 }
 let myHash = new HashMap;
 
@@ -70,3 +113,5 @@ console.log(myHash.set('hiya', 'hi'));
 console.log(myHash.set('hi', 'hi'));
 console.log(myHash.set('gus', 'bye'));
 console.log(myHash.set('gus', 'haha'));
+
+console.log(myHash.length);
