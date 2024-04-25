@@ -117,7 +117,34 @@ class HashMap {
         })
         return newArray;
     }
+
+    allValues() {
+        let newArray = [];
+        this.bucket.forEach((item) => {
+            let current = item.head;
+
+            while (current) {
+                newArray.push(current.value.value);
+                current = current.nextNode;
+            }
+        })
+        return newArray;
+    }
+
+    entries() {
+        let newArray = [];
+        this.bucket.forEach((item) => {
+            let current = item.head;
+
+            while (current) {
+                newArray.push([current.value.value, current.value.key]);
+                current = current.nextNode;
+            }
+        })
+        return newArray;
+    }
 }
+
 let myHash = new HashMap;
 
 console.log(myHash.set('gus', 'hi'));
@@ -127,4 +154,6 @@ console.log(myHash.set('hi', 'hi'));
 console.log(myHash.set('gus', 'bye'));
 console.log(myHash.set('gus', 'haha'));
 console.log(myHash.allKeys());
+console.log(myHash.allValues());
+console.log(myHash.entries());
 console.log(myHash.length);
