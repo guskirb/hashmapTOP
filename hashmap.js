@@ -29,7 +29,6 @@ class HashMap {
                 let index = this.bucket[hashCode].findKey(key);
                 this.bucket[hashCode].remove(index);
                 this.bucket[hashCode].insertAt({ key, value }, index);
-                this.keys++;
             } else {
                 this.bucket[hashCode].append({ key, value });
                 this.keys++;
@@ -140,6 +139,7 @@ class HashMap {
 
 let myHash = new HashMap;
 
+//hashmap testing
 console.log(myHash.set('Alex', '18'));
 console.log(myHash.set('Tanya', '28'));
 console.log(myHash.set('Michael', '40'));
