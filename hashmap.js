@@ -104,6 +104,19 @@ class HashMap {
         this.bucketLength = 16;
         this.keys = 0;
     }
+
+    allKeys() {
+        let newArray = [];
+        this.bucket.forEach((item) => {
+            let current = item.head;
+
+            while (current) {
+                newArray.push(current.value.key);
+                current = current.nextNode;
+            }
+        })
+        return newArray;
+    }
 }
 let myHash = new HashMap;
 
@@ -113,5 +126,5 @@ console.log(myHash.set('hiya', 'hi'));
 console.log(myHash.set('hi', 'hi'));
 console.log(myHash.set('gus', 'bye'));
 console.log(myHash.set('gus', 'haha'));
-
+console.log(myHash.allKeys());
 console.log(myHash.length);
