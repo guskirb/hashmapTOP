@@ -116,7 +116,7 @@ export default List = class LinkedList {
                 current = current.nextNode;
             }
         }
-        return false;
+        return "Key not found.";
     }
 
     find(value) {
