@@ -1,3 +1,3 @@
 # hashmapTOP
 
-I wil be creating my own hashmap data structure using javascript
+I will be creating my own hashmap data structure using javascript
