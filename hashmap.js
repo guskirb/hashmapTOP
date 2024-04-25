@@ -29,6 +29,7 @@ class HashMap {
                 let index = this.bucket[hashCode].findKey(key);
                 this.bucket[hashCode].remove(index);
                 this.bucket[hashCode].insertAt({ key, value }, index);
+                this.keys++;
             } else {
                 this.bucket[hashCode].append({ key, value });
                 this.keys++;
@@ -41,10 +42,12 @@ class HashMap {
     }
 
     checkCapacity() {
-        if (this.atCapacity()) {
+        if (this.keys >= (this.bucketLength * this.loadFactor)) {
             this.keys = 0;
+            let newArray = this.bucket;
+            this.bucket = [];
             this.bucketLength = this.bucketLength * 2;
-            this.bucket.forEach(item => {
+            newArray.forEach(item => {
                 let current = item.head;
 
                 while (current) {
@@ -53,16 +56,6 @@ class HashMap {
                 }
             })
         }
-    }
-
-    atCapacity() {
-        let indexFull = 0;
-        for (let x = 0; x < this.bucketLength; x++) {
-            if (this.bucket[x]) {
-                indexFull++
-            }
-        }
-        return (indexFull >= (this.bucketLength * this.loadFactor) ? true : false);
     }
 
     get(key) {
@@ -105,7 +98,7 @@ class HashMap {
         this.keys = 0;
     }
 
-    allKeys() {
+    get allKeys() {
         let newArray = [];
         this.bucket.forEach((item) => {
             let current = item.head;
@@ -118,7 +111,7 @@ class HashMap {
         return newArray;
     }
 
-    allValues() {
+    get allValues() {
         let newArray = [];
         this.bucket.forEach((item) => {
             let current = item.head;
@@ -131,7 +124,7 @@ class HashMap {
         return newArray;
     }
 
-    entries() {
+    get entries() {
         let newArray = [];
         this.bucket.forEach((item) => {
             let current = item.head;
@@ -147,13 +140,23 @@ class HashMap {
 
 let myHash = new HashMap;
 
-console.log(myHash.set('gus', 'hi'));
-console.log(myHash.set('gus', 'lol'));
-console.log(myHash.set('hiya', 'hi'));
-console.log(myHash.set('hi', 'hi'));
-console.log(myHash.set('gus', 'bye'));
-console.log(myHash.set('gus', 'haha'));
-console.log(myHash.allKeys());
-console.log(myHash.allValues());
-console.log(myHash.entries());
+console.log(myHash.set('Alex', '18'));
+console.log(myHash.set('Tanya', '28'));
+console.log(myHash.set('Michael', '40'));
+console.log(myHash.set('Johnny', '32'));
+console.log(myHash.set('Michelle', '19'));
+console.log(myHash.set('Ben', '35'));
+console.log(myHash.set('Gus', '25'));
+console.log(myHash.set('Jordan', '22'));
+console.log(myHash.set('Tom', '29'));
+console.log(myHash.set('Brian', '32'));
+console.log(myHash.set('Frank', '20'));
+console.log(myHash.set('Leslie', '43'));
+console.log(myHash.set('Henry', '18'));
+console.log(myHash.set('Max', '31'));
+console.log(myHash.set('Thomas', '51'));
+console.log(myHash.allKeys);
+console.log(myHash.allValues);
+console.log(myHash.entries);
 console.log(myHash.length);
+console.log(myHash.bucketLength);
